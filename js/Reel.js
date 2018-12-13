@@ -11,7 +11,7 @@ export default class Reel {
     constructor(callbackStopReel, callbackStopSpin) {
         callbackReel = callbackStopReel;
         callbackSpin = callbackStopSpin;
-        
+
         reelContainer = new PIXI.Container();
         this.createNextSpinSymbols();
     }

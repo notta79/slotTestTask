@@ -2,11 +2,13 @@ import Loader from "./Loader.js";
 import Reel from "./Reel.js";
 import GameApp from "./GameApp.js";
 import Controls from "./Controls.js";
+import SoundManager from "./SoundManager.js";
 
 const gameApp = new GameApp();
 const reel = new Reel(stopReel, stopSpin);
 const loader = new Loader(onAssetsLoaded);
 const controls = new Controls();
+const sounds = new SoundManager();
 
 let isRuning = false;
 function onAssetsLoaded(){
@@ -39,6 +41,8 @@ function startSpinReels(){
 
     isRuning = true;
 
+    sounds.reelSpinSoundPlay();
+
     controls.disableButton();
     reel.startToSpin();
 }
@@ -47,8 +51,9 @@ function stopSpin(){
     isRuning = false;
 
     controls.enableButton();
+    sounds.reelSpinSoundStop();
 }
 
 function stopReel(){
-
+    sounds.reelSpinStopPlay();
 }

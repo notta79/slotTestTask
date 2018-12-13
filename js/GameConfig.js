@@ -16,6 +16,6 @@ export default class GameConfig {
                 "assets/image/controls/btn_spin_pressed.png", "assets/image/controls/btn_spin_disable.png"];
     }
     static get soundInstName(){
-        return ["assets/sound/Reel_Spin.mp3", "assets/sound/Landing_1.mp3"];
+        return {spin: "assets/sound/Reel_Spin.mp3", stopSpin: "assets/sound/Landing_1.mp3"};
     }
 };
