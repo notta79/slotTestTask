@@ -28,4 +28,8 @@ export default class GameApp {
     get stage(){
         return app.stage;
     }
+
+    get app(){
+        return app;
+    }
 }

@@ -1,11 +1,14 @@
 import Loader from "./Loader.js";
 import Reel from "./Reel.js";
 import GameApp from "./GameApp.js";
+import Controls from "./Controls.js";
 
 const gameApp = new GameApp();
-const reel = new Reel();
+const reel = new Reel(stopReel, stopSpin);
 const loader = new Loader(onAssetsLoaded);
+const controls = new Controls();
 
+let isRuning = false;
 function onAssetsLoaded(){
     let reelContainer = reel.buidSymbolsOnReels();
     gameApp.stage.addChild(reelContainer);
@@ -16,5 +19,36 @@ function onAssetsLoaded(){
     overlay.y =  gameApp.stage.height/2 - overlay.height/2;
 
     reelContainer.x =  gameApp.stage.width/2 - reelContainer.width/2;
-    reelContainer.y =  gameApp.stage.height/2 - reelContainer.height/2-50;
+    reelContainer.y =  gameApp.stage.height/2 - reelContainer.height/2-60;
+
+    gameApp.stage.addChild(controls.spinButton);
+    controls.spinButton.x = 990;
+    controls.spinButton.y = 680;
+
+    controls.spinButton.on("pointerdown", startSpinReels);
+
+    gameApp.app.ticker.add(function(delta) {
+        if(isRuning)
+            reel.updateSlot();
+    });
+}
+
+function startSpinReels(){
+    if(isRuning)
+        return;
+
+    isRuning = true;
+
+    controls.disableButton();
+    reel.startToSpin();
+}
+
+function stopSpin(){
+    isRuning = false;
+
+    controls.enableButton();
+}
+
+function stopReel(){
+
 }
